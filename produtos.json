@@ -1,0 +1,38 @@
+{
+    
+    "saquinhos": {
+        "vermelho": {
+            "7x9":  {
+            "nome": "Saquinho 7x9",
+            "Quantidade": 180,
+            "Valor": 1.32,
+            "Lucro": 15.00
+
+      },
+          "10x12":  {
+            "nome": "Deu certo",
+            "Quantidade": 180,
+            "Valor": 3.40,
+            "Lucro": 2.73
+
+      }
+     
+
+      },"preto": {
+           "7x9":  {
+              "nome": "parabens",
+              "Quantidade": 180,
+              "Valor": 1.32,
+              "Lucro": 15.00
+
+      },
+          "10x12":  {
+              "nome": "Deu muitooo certo",
+              "Quantidade": 180,
+              "Valor": 3.40,
+              "Lucro": 2.73
+
+    }
+  } 
+}
+}
