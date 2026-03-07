@@ -62,4 +62,8 @@ def excluir(id):
     return jsonify(saquinho)
 
 
-gustavo.run(port=5000,host='localhost',debug=True)
+# No final do seu arquivo, substitua o gustavo.run(...) por:
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    gustavo.run(host='0.0.0.0', port=port)
