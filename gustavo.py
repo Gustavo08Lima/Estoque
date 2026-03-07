@@ -17,11 +17,13 @@ import os
 gustavo = Flask(__name__)
 ARQUIVO_DADOS = 'dados.json'
 
+
+
 def ler():
     with open(ARQUIVO_DADOS, 'r') as f:
         return json.load(f)
     
-def salvar():
+def salvar(dados):
     with open(ARQUIVO_DADOS,'w') as f:
         json.dump(dados,f,indent=4)
 
@@ -39,6 +41,7 @@ saquinho = [
 @gustavo.route('/saquinho',methods=['GET'])
 
 def obter():
+    saquinho = ler()
     return jsonify(saquinho)
 
 
@@ -51,25 +54,30 @@ def obter_id(id):
 
 @gustavo.route('/saquinho/<int:id>',methods=['PUT'])
 def edita_id(id):
+    saquinho = ler()
     saquinho_alterado = request.get_json()
     for indice,item in enumerate(saquinho):
         if item.get('id') == id:
             saquinho[indice].update(saquinho_alterado)
+            salvar(saquinho)
             return jsonify(saquinho[indice])
         
 @gustavo.route('/saquinho',methods=['POST'])
 def criar():
+    saquinho = ler()
     new = request.get_json()
     saquinho.append(new)
+    salvar(saquinho)
 
-    return jsonify(saquinho)
+    return jsonify(saquinho), 201
 
 @gustavo.route('/saquinho/<int:id>',methods=['DELETE'])
 def excluir(id):
     for indice, item in enumerate (saquinho):
         if item.get('id') == id:
             del saquinho[indice]
-    return jsonify(saquinho)
+            salvar(saquinho)
+            return jsonify(saquinho)
 
 
 # No final do seu arquivo, substitua o gustavo.run(...) por:
