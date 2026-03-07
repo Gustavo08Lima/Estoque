@@ -11,9 +11,19 @@
     # - Localhost/livros/id(put)
 
 from flask import Flask, jsonify, request
+import json
+import os
 
 gustavo = Flask(__name__)
+ARQUIVO_DADOS = 'dados.json'
 
+def ler():
+    with open(ARQUIVO_DADOS, 'r') as f:
+        return json.load(f)
+    
+def salvar():
+    with open(ARQUIVO_DADOS,'w') as f:
+        json.dump(dados,f,indent=4)
 
 saquinho = [
             {
