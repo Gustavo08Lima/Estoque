@@ -1,14 +1,18 @@
-import requests
+# 1. A lista deve ficar FORA da função para não ser resetada
+soma = []
 
-# A URL da sua API rodando localmente
-url = "http://127.0.0.1:8000/itens/42"
-parametros = {"q": "python_tutorial"}
+def salva():
+    # 2. Captura e converte com segurança
+    transform = "10"
+    integer = int(transform) if transform else 0 
 
-# Fazendo a requisição GET
-response = requests.get(url, params=parametros)
+    # 3. Adiciona na lista global
+    soma.append(integer)
+    
+    # 4. Debug para você ver os índices crescendo no terminal
+    print(f"Lista atual: {soma} | Último índice: {len(soma)-1}")
 
-if response.status_code == 200:
-    dados = response.json()
-    print(f"Sucesso! O item retornado foi: {dados['item_id']}")
-else:
-    print(f"Erro: {response.status_code}")
+    # Agora você pode usar soma[-1] para pegar o valor atual 
+    # ou a lista 'soma' inteira para salvar no JSON da Quadrado²Perfeito
+salva()
+salva()

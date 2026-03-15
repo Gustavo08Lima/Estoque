@@ -1,75 +1,34 @@
 {
-    
+    "Saquinhos": {
+        "preto": {
+            "7x9": {
+                "id": 1,
+                "nome": "saquinhos",
+                "quantidade": [
+                    20,
+                    20,
+                    20
+                ],
+                "valor": [
+                    20,
+                    20,
+                    20
+                ]
+            }
+        }
+    },
     "saquinhos": {
-        "vermelho": {
-            "7x9":  {
-            "nome": "Vermelho",
-            "Quantidade": ["4 un","6 un","12 un","20 un","30 un"],
-            "Valor": [9.99,12.10,18.50,27.50,39.75],
-            "Lucro": [1.72,2.61,5.33,9.33,15.13]
-        
-      },
-          "10x12":  {
-            "nome": "Vermelho",
-            "Quantidade": 180,
-            "Valor": 3.40,
-            "Lucro": 2.73
-
-      }
-     
-
-      },"preto": {
-            "7x9":  {
-            "nome": "Preto",
-            "Quantidade": ["4 un","6 un","12 un","20 un","30 un"],
-            "Valor": [9.99,12.10,18.50,27.50,39.75],
-            "Lucro": [1.72,2.61,5.33,9.33,15.13]
-        
-      },
-          "10x12":  {
-            "nome": "Preto",
-            "Quantidade": 180,
-            "Valor": 3.40,
-            "Lucro": 2.73
-
-      }
-     
-
-      } 
-},
-"saquinhos2": {
-        "vermelho": {
-            "7x9":  {
-            "nome": "Teste",
-            "Quantidade": ["4 un","6 un","12 un","20 un","30 un"],
-            "Valor": [9.99,12.10,18.50,27.50,39.75],
-            "Lucro": [1.72,2.61,5.33,9.33,15.13]
-        
-      },
-          "10x12":  {
-            "nome": "Deu certo",
-            "Quantidade": 180,
-            "Valor": 3.40,
-            "Lucro": 2.73
-
-      }
-     
-
-      },"preto": {
-           "7x9":  {
-              "nome": "parabens",
-              "Quantidade": 180,
-              "Valor": 1.32,
-              "Lucro": 15.00
-
-      },
-          "10x12":  {
-              "nome": "Deu muitooo certo",
-              "Quantidade": 180,
-              "Valor": 3.40,
-              "Lucro": 2.73
-
+        "preto": {
+            "7x9": {
+                "id": 1,
+                "nome": "saquinhos",
+                "quantidade": [
+                    20
+                ],
+                "valor": [
+                    20
+                ]
+            }
+        }
     }
-  } 
-}
 }

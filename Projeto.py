@@ -25,11 +25,19 @@ def atualiza(event):
      
      item = entrada.get()
 
-     v = list(ficha[item].keys())[0]
-     tamanho = list(ficha[item][v].keys())
+     cores = list(ficha[item].keys())
+
+     cor = cores[0]
+     tamanho = list(ficha[item][cor].keys())
+
+
+     
 
      entrada2['values'] = tamanho
      entrada2.set("Agora Escolha o tamanho")
+
+     entrada3['values'] = cores
+     entrada3.set("Agora Escolha o tamanho")
      
 
 "DIVs"
@@ -69,7 +77,7 @@ Info4 = tk.Label(bloco_tres,text="Lucro:", font=('Arial',13))
 Info4.grid(row=7,column=1, pady=2, sticky="w", padx=10)
 
 Info5 = tk.Label(bloco_dois,text="Informe a cor:", font=('Arial',13))
-Info5.grid(row=5,column=1, pady=2, sticky="w", padx=10)
+Info5.grid(row=4,column=1, pady=2, sticky="w", padx=10)
 
 
 
@@ -136,42 +144,44 @@ entrada2.set("Selecione o produto")
 entrada.bind("<<ComboboxSelected>>", atualiza)
 
 
+entrada3 = ttk.Combobox(bloco_dois,values="")
+entrada3.grid(row= 4, column=2, pady=20, padx=10,)
+entrada3.set("Selecione o produto")
+
+entrada.bind("<<ComboboxSelected>>", atualiza)
+
+
 "Botôes"
 
 def enviar():
     
     
-    valor = entrada.get().lower().strip()
-    valor2 = entrada2.get().lower()
-    Ver= var_check.get()
-    Pre= var_check2.get()
+    valor = entrada.get()
+    valor2 = entrada2.get()
+    Ver= entrada3.get()
+   
     
 
-    if Ver == 1:
-         cor = "vermelho"
-         var_check2.set(0)
-    if Pre == 1:
-        cor = "preto"
-        var_check.set(0)
+    
        
     if valor in ficha:
-        dic = ficha[valor][cor][valor2]
+        dic = ficha[valor][Ver][valor2]
         nome.config(text=dic["nome"])
 
-        quantidade.config(text=dic["Quantidade"][0])
-        quantidade1.config(text=dic["Quantidade"][1])
-        quantidade2.config(text=dic["Quantidade"][2])
-        quantidade3.config(text=dic["Quantidade"][3])
+        quantidade.config(text=dic["quantidade"][0])
+        quantidade1.config(text=dic["quantidade"][1])
+        quantidade2.config(text=dic["quantidade"][2])
+        quantidade3.config(text=dic["quantidade"][3])
         
-        valores.config(text=f"R$ {dic['Valor'][0]}")
-        valores1.config(text=f"R$ {dic['Valor'][1]}")
-        valores2.config(text=f"R$ {dic['Valor'][2]}")
-        valores3.config(text=f"R$ {dic['Valor'][3]}")
+        valores.config(text=f"R$ {dic['valor'][0]}")
+        valores1.config(text=f"R$ {dic['valor'][1]}")
+        valores2.config(text=f"R$ {dic['valor'][2]}")
+        valores3.config(text=f"R$ {dic['valor'][3]}")
 
-        lucro.config(text=f"R$ {dic['Lucro'][0]}") 
-        lucro1.config(text=f"R$ {dic['Lucro'][1]}")
-        lucro2.config(text=f"R$ {dic['Lucro'][2]}")
-        lucro3.config(text=f"R$ {dic['Lucro'][3]}")
+        lucro.config(text=f"R$ {dic['lucro'][0]}") 
+        lucro1.config(text=f"R$ {dic['lucro'][1]}")
+        lucro2.config(text=f"R$ {dic['lucro'][2]}")
+        lucro3.config(text=f"R$ {dic['lucro'][3]}")
         
 
        
@@ -185,21 +195,24 @@ def enviar():
 
 
 
+#botao
 
+botao = tk.Button(bloco_dois, text="Enviar", command=enviar)
+botao.grid(row=4, column=4)
 
 "Checagem"
    
-var_check = tk.IntVar()   
-var_check2 = tk.IntVar()   
+# var_check = tk.IntVar()   
+# var_check2 = tk.IntVar()   
 
 
 
 
-checar = tk.Checkbutton(bloco_dois,text="Vermelho",variable=var_check,command=enviar, font=('arial',10))
-checar.grid(row=5,column=2, pady=10,sticky='w')
+# checar = tk.Checkbutton(bloco_dois,text="Vermelho",variable=var_check,command=enviar, font=('arial',10))
+# checar.grid(row=5,column=2, pady=10,sticky='w')
 
-checar2 = tk.Checkbutton(bloco_dois,text="Preto",variable=var_check2,command=enviar, font=('arial',10))
-checar2.grid(row=5,column=2, pady=10, padx=(100,0), sticky='w')
+# checar2 = tk.Checkbutton(bloco_dois,text="Preto",variable=var_check2,command=enviar, font=('arial',10))
+# checar2.grid(row=5,column=2, pady=10, padx=(100,0), sticky='w')
 
 
 
