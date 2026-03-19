@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 import json
+import os
+import subprocess
+
 
 
 
@@ -49,7 +52,7 @@ bloco_dois = tk.Frame(janela)
 bloco_dois.pack()
 
 bloco_tres = tk.Frame(janela)
-bloco_tres.pack(ipadx= 100, ipady=100, pady=20, padx=20)
+bloco_tres.pack(ipadx= 100, ipady=100, pady=(10,20), padx=20)
 
 """Label"""
 
@@ -62,69 +65,13 @@ digite.grid(row=2, column=1, padx=(10,0) )
 digite2 = tk.Label(bloco_dois, text="Digite a variação ao lado:", font=('Arial',13))
 digite2.grid(row=3, column=1,  padx=(10,0), sticky='w')
 
-"Label de Informações"
-
-Info = tk.Label(bloco_tres,text="Nome:", font=('Arial',13))
-Info.grid(row=1,column=1, pady=(10,2), sticky="w", padx=10)
-
-Info2 = tk.Label(bloco_tres,text="Quantidade:", font=('Arial',13))
-Info2.grid(row=3,column=1, pady=2, sticky="w", padx=10)
-
-Info3 = tk.Label(bloco_tres,text="Valor:", font=('Arial',13))
-Info3.grid(row=5,column=1, pady=2, sticky="w", padx=10)
-
-Info4 = tk.Label(bloco_tres,text="Lucro:", font=('Arial',13))
-Info4.grid(row=7,column=1, pady=2, sticky="w", padx=10)
-
-Info5 = tk.Label(bloco_dois,text="Informe a cor:", font=('Arial',13))
-Info5.grid(row=4,column=1, pady=2, sticky="w", padx=10)
 
 
 
-
-"Label de Saida"
-
-nome = tk.Label(bloco_tres,text="", width=20, relief='raised',bd=3)
-nome.grid(row = 2, column=1, pady=10, padx=10)
-
-quantidade = tk.Label(bloco_tres,text="", width=20, relief='raised',bd=3)
-quantidade.grid(row = 4, column=1, pady=10, padx=10)
-
-valores = tk.Label(bloco_tres,text="", width=20, relief='raised',bd=3)
-valores.grid(row = 6, column=1, pady=10, padx=10)
-
-lucro = tk.Label(bloco_tres,text="", width=20, relief='raised',bd=3)
-lucro.grid(row = 8, column=1, pady=10, padx=10)
 
 
 """Variaveis"""
 
-quantidade1 = tk.Label(bloco_tres,text="", width=10,relief='raised',bd = 2)
-quantidade1.grid(row = 4, column=2, pady=10, padx=20)
-
-quantidade2 = tk.Label(bloco_tres,text="", width=10,relief='raised',bd = 2)
-quantidade2.grid(row = 4, column=3, pady=10, padx=20)
-
-quantidade3 = tk.Label(bloco_tres,text="", width=10,relief='raised',bd = 2)
-quantidade3.grid(row = 4, column=4, pady=10, padx=20)
-
-valores1 = tk.Label(bloco_tres,text="", width=10,relief='raised',bd = 2)
-valores1.grid(row = 6, column=2, pady=10, padx=20)
-
-valores2 = tk.Label(bloco_tres,text="", width=10,relief='raised',bd = 2)
-valores2.grid(row = 6, column=3, pady=10, padx=20)
-
-valores3 = tk.Label(bloco_tres,text="", width=10,relief='raised',bd = 2)
-valores3.grid(row = 6, column=4, pady=10, padx=20)
-
-lucro1 = tk.Label(bloco_tres,text="", width=10,relief='raised',bd = 2)
-lucro1.grid(row = 8, column=2, pady=10, padx=20)
-
-lucro2 = tk.Label(bloco_tres,text="", width=10,relief='raised',bd = 2)
-lucro2.grid(row = 8, column=3, pady=10, padx=20)
-
-lucro3 = tk.Label(bloco_tres,text="", width=10,relief='raised',bd = 2)
-lucro3.grid(row = 8, column=4, pady=10, padx=20)
 
 
 
@@ -159,30 +106,51 @@ def enviar():
     valor = entrada.get()
     valor2 = entrada2.get()
     Ver= entrada3.get()
+
+
+
+    Info = tk.Label(bloco_tres,text="Nome:", font=('Arial',13))
+    Info.grid(row=1,column=1, pady=(10,2), sticky="w", padx=10)
+
+    Info2 = tk.Label(bloco_tres,text="Quantidade:", font=('Arial',13))
+    Info2.grid(row=3,column=1, pady=2, sticky="w", padx=10)
+
+    Info3 = tk.Label(bloco_tres,text="Valor:", font=('Arial',13))
+    Info3.grid(row=5,column=1, pady=2, sticky="w", padx=10)
+
+    Info4 = tk.Label(bloco_tres,text="Lucro:", font=('Arial',13))
+    Info4.grid(row=7,column=1, pady=2, sticky="w", padx=10)
+
+    Info5 = tk.Label(bloco_dois,text="Informe a cor:", font=('Arial',13))
+    Info5.grid(row=4,column=1, pady=2, sticky="w", padx=10)
+
+
+
+
+    "Label de Saida"
+
+    nome = tk.Label(bloco_tres,text="", width=20, relief='raised',bd=3)
+    nome.grid(row = 2, column=1, pady=10, padx=10)
    
     
 
     
        
-    if valor in ficha:
+    if valor in ficha and Ver in ficha[valor] and valor2 in ficha[valor][Ver]:
         dic = ficha[valor][Ver][valor2]
         nome.config(text=dic["nome"])
 
-        quantidade.config(text=dic["quantidade"][0])
-        quantidade1.config(text=dic["quantidade"][1])
-        quantidade2.config(text=dic["quantidade"][2])
-        quantidade3.config(text=dic["quantidade"][3])
-        
-        valores.config(text=f"R$ {dic['valor'][0]}")
-        valores1.config(text=f"R$ {dic['valor'][1]}")
-        valores2.config(text=f"R$ {dic['valor'][2]}")
-        valores3.config(text=f"R$ {dic['valor'][3]}")
+        for i, qtd in enumerate(dic["quantidade"]):
+            lbl = tk.Label(bloco_tres, text=qtd, relief='raised', bd=2, width=10)
+            lbl.grid(row=4, column=i+1, padx=5, pady=10)
 
-        lucro.config(text=f"R$ {dic['lucro'][0]}") 
-        lucro1.config(text=f"R$ {dic['lucro'][1]}")
-        lucro2.config(text=f"R$ {dic['lucro'][2]}")
-        lucro3.config(text=f"R$ {dic['lucro'][3]}")
-        
+        for i, val in enumerate(dic["valor"]):
+            lbl = tk.Label(bloco_tres, text=val, relief='raised', bd=2, width=10)
+            lbl.grid(row=6, column=i+1, padx=5, pady=10)
+
+        for i, luc in enumerate(dic["lucro"]):
+            lbl = tk.Label(bloco_tres, text=luc, relief='raised', bd=2, width=10)
+            lbl.grid(row=8, column=i+1, padx=5, pady=(10,5))
 
        
 
@@ -191,14 +159,28 @@ def enviar():
          quantidade.config(text="")
          valores.config(text="")
          lucro.config(text="")
+
          
+def abrir_janela_adicionar():
+    caminho_atual = os.path.dirname(__file__)
+
+    arquivo = os.path.join(caminho_atual,"launcher.py")
+   
+    subprocess.Popen(["python", arquivo])    
+    
+    janela.destroy()
 
 
-
-#botao
+#BOTOES
 
 botao = tk.Button(bloco_dois, text="Enviar", command=enviar)
 botao.grid(row=4, column=4)
+
+
+
+botao4 = tk.Button(janela, text="sair",
+                      command= abrir_janela_adicionar)
+botao4.pack()
 
 "Checagem"
    
@@ -219,4 +201,3 @@ botao.grid(row=4, column=4)
 
 janela.mainloop()
 
-print(valores)

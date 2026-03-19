@@ -1,34 +1,32 @@
 {
     "Saquinhos": {
-        "preto": {
+        "Vermelho": {
             "7x9": {
                 "id": 1,
-                "nome": "saquinhos",
+                "nome": "Saq - Vermelho",
                 "quantidade": [
+                    4,
+                    6,
+                    12,
                     20,
-                    20,
-                    20
+                    30
                 ],
                 "valor": [
-                    20,
-                    20,
-                    20
-                ]
-            }
-        }
-    },
-    "saquinhos": {
-        "preto": {
-            "7x9": {
-                "id": 1,
-                "nome": "saquinhos",
-                "quantidade": [
-                    20
+                    9.99,
+                    12.15,
+                    18.5,
+                    27.5,
+                    39.75
                 ],
-                "valor": [
-                    20
+                "lucro": [
+                    2.19,
+                    3.02,
+                    5.4,
+                    9.0,
+                    14.3
                 ]
             }
         }
     }
+
 }

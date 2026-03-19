@@ -1,18 +1,24 @@
-# 1. A lista deve ficar FORA da função para não ser resetada
-soma = []
 
-def salva():
-    # 2. Captura e converte com segurança
-    transform = "10"
-    integer = int(transform) if transform else 0 
 
-    # 3. Adiciona na lista global
-    soma.append(integer)
-    
-    # 4. Debug para você ver os índices crescendo no terminal
-    print(f"Lista atual: {soma} | Último índice: {len(soma)-1}")
+valor = [ 20, 39, 50, 60]
+quantidade = [30,20, 30]
 
-    # Agora você pode usar soma[-1] para pegar o valor atual 
-    # ou a lista 'soma' inteira para salvar no JSON da Quadrado²Perfeito
-salva()
-salva()
+
+
+for i  in valor:
+
+    if i < 50:
+        result = list(map(lambda x: round((x - (x*0.18) - ( x* 0.02) - 4 ),2), valor))
+    else:
+        result = list(map(lambda x: round((x - (x*0.14) - ( x* 0.02) - 20 ),2), valor))
+
+
+qtd = list(map(lambda x: round((x*0.45),2), quantidade))
+
+soma = list(map(lambda x,y: x - y, result, qtd))
+
+
+
+print(f"Valor Desc {result}\n")
+print(f"custo {qtd}\n")
+print(f"total {soma}")
