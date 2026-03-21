@@ -9,7 +9,7 @@ import subprocess
 janela = tk.Tk()
 janela.geometry("600x600", )
 janela.title("Adicionar")
-janela.config(bg="blue")
+janela.config(bg="#1C60E6")
 
 
 tk.Label(janela,text="Boas vindas").pack(pady=10)
@@ -49,27 +49,34 @@ informacao2.grid(row=2, column=1, padx=10, sticky='w')
 informacao4 = tk.Label(div2, text="Valor")
 informacao4.grid(row=3, column=1, padx=10, sticky='w')
 
+informacao5 = tk.Label(div2, text="Custo do PRODUTO")
+informacao5.grid(row=4, column=1, padx=10, sticky='w')
+
 #ENTRADA keys
 
-entrada = tk.Entry(div1, borderwidth=0)
+entrada = tk.Entry(div1)
 entrada.grid(row=1,column=2, pady=10, padx=(10,40))
 
-entrada2 = tk.Entry(div1, borderwidth=0)
+entrada2 = tk.Entry(div1)
 entrada2.grid(row=2,column=2, pady=10, padx=(10,40))
 
-entrada3 = tk.Entry(div1, borderwidth=0)
+entrada3 = tk.Entry(div1)
 entrada3.grid(row=3,column=2, pady=10, padx=(10,40))
 
+custo = tk.Entry(div2)
+custo.grid(row=4, column=2, padx=10, pady=10)
 #ENTRADA dicionario
 
-dicionario1 = tk.Entry(div2, borderwidth=0)
+dicionario1 = tk.Entry(div2)
 dicionario1.grid(row=1, column=2, padx=10, pady=10)
 
-dicionario2 = tk.Entry(div2, borderwidth=0)
+dicionario2 = tk.Entry(div2)
 dicionario2.grid(row=2, column=2, padx=10, pady=10)
 
-dicionario4 = tk.Entry(div2, borderwidth=0)
+dicionario4 = tk.Entry(div2)
 dicionario4.grid(row=3, column=2, padx=10, pady=10)
+
+
 
 
 
@@ -77,6 +84,7 @@ dicionario4.grid(row=3, column=2, padx=10, pady=10)
 soma = []
 qnt = []
 desc = []
+gastos = 0.0
 
 
 
@@ -85,8 +93,11 @@ desc = []
 
 # Adicionar valores separados
 def add():
+    global gastos
+
     transform = dicionario4.get().strip()
     integer = float(transform) 
+    
 
     soma.append(integer)
 
@@ -94,6 +105,11 @@ def add():
     integers = int(transforms)
 
     qnt.append(integers)
+
+    transforma = custo.get().strip()
+    inteiro = float(transforma)
+
+    gastos = inteiro
 
     botao2 = tk.Button(div2, text="Adicione & atualize",
                      command= salva)
@@ -110,6 +126,8 @@ def salva():
     with open("produtos.json", 'r', encoding="utf-8") as f:
         estoque = json.load(f)
     
+    
+
     desc = []
 
     for x in soma:
@@ -122,10 +140,13 @@ def salva():
 
 
 
-
-    custo = list(map(lambda x: round((x*0.45),2), qnt))
+    
+    custo = list(map(lambda x: round((x*gastos),2), qnt))
     total = list(map(lambda x,y: round((x - y),2), desc, custo))
-
+   
+    print(gastos)
+    print(custo)
+    print(total)
 
     somas = soma
     quantidade = qnt
@@ -141,16 +162,17 @@ def salva():
         "lucro": total
     }
 
-    adicionar_nova_cor(entrada.get(), entrada2.get(), entrada3.get(),dados)
+    adicionar_nova_cor(entrada.get().lower(), entrada2.get(), entrada3.get(),dados)
 
 def abrir_janela_adicionar():
-    caminho_atual = os.path.dirname(__file__)
+     if os.path.exists("launcher.exe"):
+         subprocess.Popen(["launcher.exe"])
+     else:
+        subprocess.Popen(["python", "launcher.py"])
 
-    arquivo = os.path.join(caminho_atual,"launcher.py")
-   
-    subprocess.Popen(["python", arquivo])    
+      
     
-    janela.destroy()
+     janela.destroy()
 
 
 #BOTOES
@@ -162,7 +184,7 @@ botao4.pack()
 
 botao3 = tk.Button(div2, text="Adicione os valores",
                      command= add)
-botao3.grid(row=3, column=3, padx=10)
+botao3.grid(row=4, column=3, padx=10)
 
 
 

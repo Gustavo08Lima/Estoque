@@ -13,6 +13,7 @@ import subprocess
 janela = tk.Tk()
 janela.title("Estoque")
 janela.geometry("600x600")
+janela.config(bg="#EDC028")
 
 "Funções"
 
@@ -45,25 +46,27 @@ def atualiza(event):
 
 "DIVs"
 
-bloco_um = tk.Frame(janela)
+bloco_um = tk.Frame(janela,  bg='#EDC028')
 bloco_um.pack()
 
-bloco_dois = tk.Frame(janela)
+bloco_dois = tk.Frame(janela, bd=1, relief='solid')
 bloco_dois.pack()
 
-bloco_tres = tk.Frame(janela)
-bloco_tres.pack(ipadx= 100, ipady=100, pady=(10,20), padx=20)
+bloco_tres = tk.Frame(janela, bd=1, relief='solid')
+bloco_tres.pack( pady=(10,20), padx=20)
 
 """Label"""
 
-intro = tk.Label(bloco_um, text="Bem vindo")
-intro.pack()
+tk.Label(bloco_um, text="Bem vindo", bg='#EDC028').pack(pady=10)
 
 digite = tk.Label(bloco_dois, text="Digite algo o produto ao lado:", font=('Arial',13),)
 digite.grid(row=2, column=1, padx=(10,0) )
 
 digite2 = tk.Label(bloco_dois, text="Digite a variação ao lado:", font=('Arial',13))
 digite2.grid(row=3, column=1,  padx=(10,0), sticky='w')
+
+digite3 = tk.Label(bloco_dois, text="Digite a cor ao lado:", font=('Arial',13))
+digite3.grid(row=4, column=1,  padx=(10,0), sticky='w')
 
 
 
@@ -72,7 +75,24 @@ digite2.grid(row=3, column=1,  padx=(10,0), sticky='w')
 
 """Variaveis"""
 
+"Label de Saida"
 
+
+
+Info = tk.Label(bloco_tres,text="Nome:", font=('Arial',13))
+Info.grid(row=1,column=1, pady=(10,2), sticky="w", padx=10)
+
+Info2 = tk.Label(bloco_tres,text="Quantidade:", font=('Arial',13))
+Info2.grid(row=3,column=1, pady=2, sticky="w", padx=10)
+
+Info3 = tk.Label(bloco_tres,text="Valor:", font=('Arial',13))
+Info3.grid(row=5,column=1, pady=2, sticky="w", padx=10)
+
+Info4 = tk.Label(bloco_tres,text="Lucro:", font=('Arial',13))
+Info4.grid(row=7,column=1, pady=2, sticky="w", padx=10)
+
+Info5 = tk.Label(bloco_dois,text="Informe a cor:", font=('Arial',13))
+Info5.grid(row=4,column=1, pady=2, sticky="w", padx=10)
 
 
 
@@ -98,7 +118,12 @@ entrada3.set("Selecione o produto")
 entrada.bind("<<ComboboxSelected>>", atualiza)
 
 
+
+
+
 "Botôes"
+
+label = []
 
 def enviar():
     
@@ -107,74 +132,60 @@ def enviar():
     valor2 = entrada2.get()
     Ver= entrada3.get()
 
-
-
-    Info = tk.Label(bloco_tres,text="Nome:", font=('Arial',13))
-    Info.grid(row=1,column=1, pady=(10,2), sticky="w", padx=10)
-
-    Info2 = tk.Label(bloco_tres,text="Quantidade:", font=('Arial',13))
-    Info2.grid(row=3,column=1, pady=2, sticky="w", padx=10)
-
-    Info3 = tk.Label(bloco_tres,text="Valor:", font=('Arial',13))
-    Info3.grid(row=5,column=1, pady=2, sticky="w", padx=10)
-
-    Info4 = tk.Label(bloco_tres,text="Lucro:", font=('Arial',13))
-    Info4.grid(row=7,column=1, pady=2, sticky="w", padx=10)
-
-    Info5 = tk.Label(bloco_dois,text="Informe a cor:", font=('Arial',13))
-    Info5.grid(row=4,column=1, pady=2, sticky="w", padx=10)
-
-
-
-
-    "Label de Saida"
-
-    nome = tk.Label(bloco_tres,text="", width=20, relief='raised',bd=3)
-    nome.grid(row = 2, column=1, pady=10, padx=10)
-   
+    for l in label:
+         
+        l.destroy()
     
 
+    label.clear()
+
+    nome = tk.Label(bloco_tres,text="", relief='raised',bd=3)
+    nome.grid(row = 2, column=1, pady=10, padx=5)
     
        
     if valor in ficha and Ver in ficha[valor] and valor2 in ficha[valor][Ver]:
         dic = ficha[valor][Ver][valor2]
         nome.config(text=dic["nome"])
+        label.append(nome)
 
         for i, qtd in enumerate(dic["quantidade"]):
             lbl = tk.Label(bloco_tres, text=qtd, relief='raised', bd=2, width=10)
             lbl.grid(row=4, column=i+1, padx=5, pady=10)
+            label.append(lbl)
 
         for i, val in enumerate(dic["valor"]):
             lbl = tk.Label(bloco_tres, text=val, relief='raised', bd=2, width=10)
             lbl.grid(row=6, column=i+1, padx=5, pady=10)
+            label.append(lbl)
 
         for i, luc in enumerate(dic["lucro"]):
             lbl = tk.Label(bloco_tres, text=luc, relief='raised', bd=2, width=10)
-            lbl.grid(row=8, column=i+1, padx=5, pady=(10,5))
+            lbl.grid(row=8, column=i+1, padx=5, pady=(10,15))
+            label.append(lbl)
 
        
 
-    else:
-         nome.config(text="")
-         quantidade.config(text="")
-         valores.config(text="")
-         lucro.config(text="")
+   
+         
+    
 
          
 def abrir_janela_adicionar():
-    caminho_atual = os.path.dirname(__file__)
+     if os.path.exists("launcher.exe"):
+         subprocess.Popen(["launcher.exe"])
+     else:
+        subprocess.Popen(["python", "launcher.py"])
 
-    arquivo = os.path.join(caminho_atual,"launcher.py")
-   
-    subprocess.Popen(["python", arquivo])    
+      
     
-    janela.destroy()
+     janela.destroy()
+    
 
 
 #BOTOES
 
 botao = tk.Button(bloco_dois, text="Enviar", command=enviar)
-botao.grid(row=4, column=4)
+botao.grid(row=4, column=4, padx=10)
 
 
 

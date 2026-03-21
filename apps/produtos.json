@@ -1,0 +1,67 @@
+{
+    "Saquinhos": {
+        "Vermelho": {
+            "7x9": {
+                "id": 1,
+                "nome": "Saq - Vermelho",
+                "quantidade": [
+                    4,
+                    6,
+                    12,
+                    20,
+                    30
+                ],
+                "valor": [
+                    9.99,
+                    12.15,
+                    18.5,
+                    27.5,
+                    39.75
+                ],
+                "lucro": [
+                    2.19,
+                    3.02,
+                    5.4,
+                    9.0,
+                    14.3
+                ]
+            }
+        }
+    },
+    "higiene pet": {
+        "azul": {
+            "6x13": {
+                "id": 1,
+                "nome": "escova de desembolar",
+                "quantidade": [
+                    1,
+                    2
+                ],
+                "valor": [
+                    10.5,
+                    20.0
+                ],
+                "lucro": [
+                    1.9,
+                    7.0
+                ]
+            },
+            "2x13": {
+                "id": 1,
+                "nome": "Escova para escovar",
+                "quantidade": [
+                    1,
+                    2
+                ],
+                "valor": [
+                    10.5,
+                    20.0
+                ],
+                "lucro": [
+                    1.4,
+                    6.0
+                ]
+            }
+        }
+    }
+}

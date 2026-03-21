@@ -7,14 +7,15 @@ from PIL import Image, ImageTk
 janela = tk.Tk()
 janela.geometry("900x500")
 janela.title("Launcher")
+janela.config(bg="#1C60E6")
 
 
-titulo = tk.Label(janela,text="Escolha o APP", font="Arial, 15")
+titulo = tk.Label(janela,text="Escolha o APP", font="Arial, 15 ",fg="white", bg="#1C60E6")
 titulo.pack(pady=(20,0))
 
 #DIVs
 
-cont = tk.Frame(janela)
+cont = tk.Frame(janela, bg="#1C60E6")
 cont.pack(expand=True)
 
 div1 = tk.Frame(cont, width=350,height=350, bd=2, relief='solid')
@@ -27,35 +28,33 @@ div2.pack_propagate(False)
 
 #FUNÇÃO PARA ABRIR APP
 def abrir_janela_adicionar():
-    caminho_atual = os.path.dirname(__file__)
-
-    arquivo = os.path.join(caminho_atual,"janela_de_adicionar.py")
-   
-    subprocess.Popen(["python", arquivo])
+    if os.path.exists("janela_de_adicionar.exe"):
+        subprocess.Popen(["janela_de_adicionar.exe"])
+    else:
+        subprocess.Popen(["python", "janela_de_adicionar.py"])
 
     janela.destroy()
 
 def abrir_Projeto():
-    caminho_atual = os.path.dirname(__file__)
-
-    arquivo = os.path.join(caminho_atual,"Projeto.py")
-   
-    subprocess.Popen(["python", arquivo])
+    if os.path.exists("Projeto.exe"):
+        subprocess.Popen(["Projeto.exe"])
+    else:
+        subprocess.Popen(["python", "Projeto.py"])
+    
     janela.destroy()
 
 
-caminho_atual = os.path.dirname(__file__)
-caminho_imagem = os.path.join(caminho_atual, "folder.png")
 
-caminho_imagem2 = os.path.join(caminho_atual, "plus.png")
 
-imagem_dimensiona2 = Image.open(caminho_imagem2)
-imagem_dimensiona = Image.open(caminho_imagem)
+caminho_imagem2 = Image.open("imagem/plus.png")
+caminho_imagem = Image.open("imagem/folder.png")
+
+
 tamanho = (100,100)
 
 
-img_dim = imagem_dimensiona.resize(tamanho)
-img_dim2 = imagem_dimensiona2.resize(tamanho)
+img_dim = caminho_imagem.resize(tamanho)
+img_dim2 = caminho_imagem2.resize(tamanho)
 
 imagem_tk = ImageTk.PhotoImage(img_dim)
 imagem_tks = ImageTk.PhotoImage(img_dim2)
